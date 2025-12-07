@@ -4,7 +4,7 @@ import type ICategoria from '@/interfaces/ICategoria';
 import IngredienteSelecionavel from './IngredienteSelecionavel.vue';
 
 const props = defineProps<{
-    categoria: ICategoria, required: true
+    categoria: ICategoria
 }>()
 
 const emit = defineEmits(['adicionarIngrediente', 'removerIngrediente'])
