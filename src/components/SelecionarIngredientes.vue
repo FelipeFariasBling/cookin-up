@@ -1,21 +1,16 @@
-<script lang="ts">
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { obterCategorias } from '@/http/index';
 import type ICategoria from '@/interfaces/ICategoria';
 import CardCategoria from './CardCategoria.vue';
 import BotaoPrincipal from './BotaoPrincipal.vue';
 
-export default {
-    data() {
-        return {
-            categorias: [] as ICategoria[]
-        }
-    },
-    async created() {
-        this.categorias = await obterCategorias();
-    },
-    components: { CardCategoria, BotaoPrincipal },
-    emits: ['adicionarIngrediente', 'removerIngrediente']
-}
+const categorias = ref<ICategoria[]>([])
+const emit = defineEmits(['adicionarIngrediente', 'removerIngrediente'])
+
+onMounted(async () => {
+    categorias.value = await obterCategorias();
+})
 </script>
 
 <template>
