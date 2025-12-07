@@ -1,14 +1,9 @@
-<script lang="ts">
-import type { PropType } from 'vue';
+<script setup lang="ts">
 import Tag from './Tag.vue';
 
-
-export default {
-    props: {
-        ingredientes: {  type: Array as PropType<string[]>, required: true}
-    },
-    components: { Tag }
-}
+const props = defineProps<{
+    ingredientes: string[]
+}>()
 </script>
 
 <template>
