@@ -7,10 +7,15 @@ export default {
     name: 'ConteudoPrincipal',
     data() {
         return {
-            ingredientes: ['Alho', 'Manteiga', 'Orégano']
+            ingredientes: [] as string[]
         }
     },
-    components: { SelecionarIngredientes, SuaLista, Tag }
+    components: { SelecionarIngredientes, SuaLista, Tag },
+    methods: {
+        adicionarIngrediente(ingrediente: string) {
+            this.ingredientes.push(ingrediente)
+        }
+    }
 
 }
 </script>
@@ -18,7 +23,7 @@ export default {
 <template>
     <main class="conteudo-principal">
         <SuaLista :ingredientes="ingredientes" />
-        <SelecionarIngredientes />
+        <SelecionarIngredientes @adicionar-ingrediente="adicionarIngrediente"/>
     </main>
 </template>
 
