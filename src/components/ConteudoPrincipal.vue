@@ -1,11 +1,14 @@
     <script lang="ts">
+import SelecionarIngredientes from './SelecionarIngredientes.vue';
+
     export default {
         name: 'ConteudoPrincipal',
         data() {
             return {
                 ingredientes: ['Alho', 'Manteiga', 'Orégano']
             }
-        }
+        },
+        components: { SelecionarIngredientes }
     }
 </script>
 
@@ -25,6 +28,7 @@
                 Sua lista está vazia. Adicione ingredientes para começar a cozinhar!
             </p>
         </section>
+        <SelecionarIngredientes />
     </main>
 </template>
 
