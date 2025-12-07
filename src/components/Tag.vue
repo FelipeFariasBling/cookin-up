@@ -1,10 +1,9 @@
-<script lang="ts">
-export default {
-    props: {
-        texto: { type: String, required: true },
-        ativa: Boolean
-    }
-}
+<script setup lang="ts">
+
+const props = defineProps<{
+    texto: string
+    ativa: boolean
+}>()
 </script>
 
 <template>
