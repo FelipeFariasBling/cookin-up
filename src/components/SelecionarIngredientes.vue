@@ -6,7 +6,7 @@ import CardCategoria from './CardCategoria.vue';
 import BotaoPrincipal from './BotaoPrincipal.vue';
 
 const categorias = ref<ICategoria[]>([])
-const emit = defineEmits(['adicionarIngrediente', 'removerIngrediente'])
+const emit = defineEmits(['adicionarIngrediente', 'removerIngrediente', 'buscarReceitas'])
 
 onMounted(async () => {
     categorias.value = await obterCategorias();
@@ -30,7 +30,7 @@ onMounted(async () => {
         <p class="paragrafo dica">
             *Atenção: consideramos que você tem em casa sal, pimenta e água.
         </p>
-        <BotaoPrincipal texto="Buscar receitas!" />
+        <BotaoPrincipal texto="Buscar receitas!" @click="$emit('buscarReceitas')" />
     </section>
 </template>
 
