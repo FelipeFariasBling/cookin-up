@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, type PropType } from 'vue';
 import { obterReceitas } from '@/http';
 import type IReceita from '@/interfaces/IReceita';
 import BotaoPrincipal from './BotaoPrincipal.vue';
 import CardReceita from './CardReceita.vue';
+import { itensDeLista1EstãoEmLista2 } from '@/operacoes/listas';
 
 const receitasEncontradas = ref<IReceita[]>([])
 
+const props = defineProps({
+    ingredientes: {
+        type: Array as PropType<string[]>,
+        required: true
+    }
+})
+
 onMounted(async () => {
     const receitas = await obterReceitas();
-    receitasEncontradas.value = receitas.slice(0, 8);
+    receitasEncontradas.value = receitas.filter((receita) => {
+        const possoFazerReceita = itensDeLista1EstãoEmLista2(receita.ingredientes, props.ingredientes);
+        return possoFazerReceita;
+    })
 })
 
 const emit = defineEmits(['editarReceitas'])
@@ -41,7 +52,7 @@ const emit = defineEmits(['editarReceitas'])
                 Ops, não encontramos resultados para sua combinação. Vamos tentar de novo?
             </p>
 
-            <img src="../assets/imagens/sem-receitas.png"
+            <img src="../assets/images/sem-receitas.png"
                 alt="Desenho de um ovo quebrado. A gema tem um rosto com uma expressão triste.">
         </div>
 
