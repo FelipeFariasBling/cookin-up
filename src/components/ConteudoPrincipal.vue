@@ -20,19 +20,20 @@ function navegar(pagina: Pagina) {
 
 
 function removerIngrediente(ingrediente: string) {
-            ingredientes.value = ingredientes.value.filter(iLista => ingrediente !== iLista);
-        }
+    ingredientes.value = ingredientes.value.filter(iLista => ingrediente !== iLista);
+}
 </script>
 
 <template>
     <main class="conteudo-principal">
         <SuaLista :ingredientes="ingredientes" />
-        <SelecionarIngredientes v-if="conteudo === 'SelecionarIngredientes'"
-            @adicionar-ingrediente="adicionarIngrediente"
-            @remover-ingrediente="removerIngrediente"
-            @buscar-receitas="navegar('MostrarReceitas')" />
-
-        <MostrarReceitas v-else-if="conteudo === 'MostrarReceitas'" />
+        <KeepAlive>
+            <SelecionarIngredientes v-if="conteudo === 'SelecionarIngredientes'"
+                @adicionar-ingrediente="adicionarIngrediente" @remover-ingrediente="removerIngrediente"
+                @buscar-receitas="navegar('MostrarReceitas')" />
+            <MostrarReceitas v-else-if="conteudo === 'MostrarReceitas'"
+                @editar-receitas="navegar('SelecionarIngredientes')" />
+        </KeepAlive>
     </main>
 </template>
 
